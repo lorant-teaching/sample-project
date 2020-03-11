@@ -1,14 +1,14 @@
 package com.engeto;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class CountryStats {
-    private ArrayList<Country> highestVAT;
-    private ArrayList<Country> lowestVAT;
 
-    public void highestVAT(ArrayList<Country> countries) {
-        this.highestVAT = new ArrayList<>();
-        Country highestCountry = new Country();
+
+    public List<Country> getHighestVAT(List<Country> countries) {
+        List<Country> highestVAT = new ArrayList();
+        Country highestCountry = null;
         for (int i = 0; i < 3; i++) {
             double highestRate = Double.MIN_VALUE;
             for (Country oneCountry : countries) {
@@ -17,13 +17,14 @@ public class CountryStats {
                     highestCountry = oneCountry;
                 }
             }
-            this.highestVAT.add(new Country(highestCountry.getName(), highestCountry.getCode(), highestCountry.getStandardRate()));
+            highestVAT.add(highestCountry);
             countries.remove(highestCountry);
         }
+        return highestVAT;
     }
 
-    public void lowestVAT(ArrayList<Country> countries) {
-        this.lowestVAT = new ArrayList<>();
+    public List<Country> getLowestVAT(List<Country> countries) {
+        List<Country> lowestVAT = new ArrayList<>();
         Country lowestCountry = new Country();
         for (int i = 0; i < 3; i++) {
             double lowestRate = Double.MAX_VALUE;
@@ -33,22 +34,9 @@ public class CountryStats {
                     lowestCountry = oneCountry;
                 }
             }
-            this.lowestVAT.add(new Country(lowestCountry.getName(), lowestCountry.getCode(), lowestCountry.getStandardRate()));
+            lowestVAT.add(new Country(lowestCountry.getName(), lowestCountry.getCode(), lowestCountry.getStandardRate()));
             countries.remove(lowestCountry);
         }
-    }
-
-    public void printHighest() {
-        System.out.println("Countries with highest standard interest rates are following: ");
-        for (Country country : this.highestVAT) {
-            System.out.println(country);
-        }
-    }
-
-    public void printLowest() {
-        System.out.println("Countries with highest standard interest rates are following: ");
-        for (Country country : this.lowestVAT) {
-            System.out.println(country);
-        }
+        return lowestVAT;
     }
 }

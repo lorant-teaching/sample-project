@@ -1,21 +1,35 @@
 package com.engeto;
 
+import kong.unirest.GetRequest;
 import kong.unirest.json.JSONObject;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class Main {
 
     public static void main(String[] args) {
-        JSONObject jsonObject = new JsonDownloader().downloadFrom("http://jsonvat.com/");
+        JsonDownloader jsonDownloader = new JsonDownloader();
+        GetRequest request = jsonDownloader.getRequestFrom("http://jsonvat.com/");
+        JSONObject jsonObject = jsonDownloader.getAsJson(request);
         ArrayList<Country> countries = new CountryExtractor().extractCountries(jsonObject);
 
         CountryStats countryStats = new CountryStats();
-        countryStats.highestVAT(countries);
-        countryStats.lowestVAT(countries);
+        List<Country> highestVAT = countryStats.getHighestVAT(countries);
+        List<Country> lowestVAT = countryStats.getLowestVAT(countries);
 
-        countryStats.printHighest();
+        System.out.println("Countries with highest standard interest rates are following: ");
+        for (Country country : highestVAT) {
+            System.out.println(country);
+        }
+
         System.out.println("");
-        countryStats.printLowest();
+
+        System.out.println("Countries with highest standard interest rates are following: ");
+        for (Country country : lowestVAT) {
+            System.out.println(country);
+        }
+
+
     }
 }

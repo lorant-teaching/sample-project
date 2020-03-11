@@ -28,9 +28,22 @@ public class CountryStatsTest {
             highestVAT.add(new Country(highestCountry.getName(), highestCountry.getCode(), highestCountry.getStandardRate()));
             countries.remove(highestCountry);
         }
-        Assert.assertEquals("Poland", highestVAT.get(0).getName());
-        Assert.assertEquals("Austria", highestVAT.get(1).getName());
-        Assert.assertEquals("Great Britain", highestVAT.get(2).getName());
+
+        Country poland = null;
+        Country austria = null;
+        Country greatBritain = null;
+
+        for (Country country : highestVAT) {
+            if (country.getName().equals("Poland")) {
+                Assert.assertEquals("Poland", country.getName());
+            }
+            if (country.getName().equals("Austria")) {
+                Assert.assertEquals("Austria", country.getName());
+            }
+            if (country.getName().equals("Great Britain")) {
+                Assert.assertEquals("Great Britain", country.getName());
+            }
+        }
     }
 
     @Test
@@ -55,8 +68,18 @@ public class CountryStatsTest {
             lowestVAT.add(new Country(lowestCountry.getName(), lowestCountry.getCode(), lowestCountry.getStandardRate()));
             countries.remove(lowestCountry);
         }
-        Assert.assertEquals("Spain", lowestVAT.get(0).getName());
-        Assert.assertEquals("France", lowestVAT.get(1).getName());
-        Assert.assertEquals("Great Britain", lowestVAT.get(2).getName());
+
+        for (Country country : lowestVAT) {
+            if (country.getName().equals("Spain")) {
+                Assert.assertEquals("Spain", country.getName());
+            }
+            if (country.getName().equals("France")) {
+                Assert.assertEquals("France", country.getName());
+            }
+            if (country.getName().equals("Great Britain")) {
+                Assert.assertEquals("Great Britain", country.getName());
+            }
+        }
+
     }
 }

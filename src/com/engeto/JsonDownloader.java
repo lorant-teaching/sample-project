@@ -7,8 +7,13 @@ import kong.unirest.Unirest;
 import kong.unirest.json.JSONObject;
 
 public class JsonDownloader {
-    public JSONObject downloadFrom(String adress) {
+
+    public GetRequest getRequestFrom(String adress) {
         GetRequest request = Unirest.get(adress);
+        return request;
+    }
+
+    public JSONObject getAsJson(GetRequest request) {
         HttpResponse<JsonNode> jsonResponse = request.asJson();
         JsonNode json = jsonResponse.getBody();
         return json.getObject();
